@@ -2,19 +2,19 @@
 
 function roman(input) {
 	let romanMap = {
-		'M': [1000, 3], // 1000 - значение, 3 - кол-во допустимых повторений подряд.
-		'CM': [900, 1],
-		'D': [500, 1],
-		'CD': [400, 1],
-		'C': [100, 3],
-		'XC': [90, 1],
-		'L': [50, 1],
-		'XL': [40, 1],
-		'X': [10, 3],
-		'IX': [9, 1],
-		'V': [5, 1],
-		'IV': [4, 1],
-		'I': [1, 3]
+		'M': 1000,
+		'CM': 900,
+		'D': 500,
+		'CD': 400,
+		'C': 100,
+		'XC': 90,
+		'L': 50,
+		'XL': 40,
+		'X': 10,
+		'IX': 9,
+		'V': 5,
+		'IV': 4,
+		'I': 1
 	};
 
 	let arab2rome = number => {
@@ -22,9 +22,8 @@ function roman(input) {
 		if (number <= 0 || number > 3999)
 			return "Wrong Input";
 		for (let i in romanMap) {
-			let repeat = Math.floor(number / romanMap[i][0]);
-			repeat = repeat > romanMap[i][1] ? romanMap[i][1] : repeat
-			number -= repeat * romanMap[i][0];
+			let repeat = Math.floor(number / romanMap[i]);
+			number -= repeat * romanMap[i];
 			result += i.repeat(repeat)
 		}
 		return result;
@@ -39,7 +38,7 @@ function roman(input) {
 		str = str.toUpperCase();
 		while (i < rome.length && currDigit < str.length) {
 			if (str.substr(currDigit, rome[i].length) === rome[i]) {
-				result += arab[i][0]
+				result += arab[i]
 				currDigit += rome[i].length
 			} else
 				++i;
