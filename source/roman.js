@@ -1,5 +1,9 @@
 'use strict';
-
+/**
+ * Translates roman/arab number to arab/roman number
+ * @param {integer || string} input - Arabic or Roman number
+ * @returns {integer || string} - Roman or Arabic representation of given number
+ */
 function roman(input) {
 	let romanMap = {
 		'M': 1000,
@@ -18,7 +22,7 @@ function roman(input) {
 	};
 
 	let arab2rome = number => {
-		let result = '';
+		let result = "";
 		if (number <= 0 || number > 3999)
 			return "Wrong Input";
 		for (let i in romanMap) {
