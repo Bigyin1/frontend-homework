@@ -18,8 +18,9 @@ const romanMap = {
 
 const arab2rome = (number) => {
 	let result = "";
-	if (number <= 0 || number > 3999)
+	if (number <= 0 || number > 3999) {
 		return "Wrong Input";
+	}
 	Object.keys(romanMap).forEach((val) => {
 		let repeat = Math.floor(number / romanMap[val]);
 		number -= repeat * romanMap[val];
