@@ -40,22 +40,22 @@ const arab2rome =
  * @param {string} str - Roman number
  * @returns {integer} - Arabic representation of given number
  */
-const rome2arab =
-	(str) => {
-		let result = 0;
-		let currDigit = 0;
-		let i = 0;
-		const rome = Object.keys(romanMap);
-		while (i < rome.length && currDigit < str.length) {
-			if (str.substr(currDigit, rome[i].length) === rome[i]) {
-				result += romanMap[rome[i]];
-				currDigit += rome[i].length;
+const rome2arab = (str) => {
+	let result = 0;
+	let currDigit = 0;
+	for (let i in romanMap) {
+		while (currDigit < str.length) {
+			if (str.substr(currDigit, i.length) === i) {
+				result += romanMap[i];
+				currDigit += i.length;
 			} else {
-				++i;
+				break;
 			}
 		}
-		return result;
 	}
+	return result;
+}
+
 
 /**
  * Gets roman numberm, validate it and returns its arabic representation
