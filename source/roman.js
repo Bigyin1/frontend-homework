@@ -43,16 +43,16 @@ const arab2rome =
 const rome2arab = (str) => {
 	let result = 0;
 	let currDigit = 0;
-	for (let i in romanMap) {
+	Object.keys(romanMap).forEach((num) => {
 		while (currDigit < str.length) {
-			if (str.substr(currDigit, i.length) === i) {
-				result += romanMap[i];
-				currDigit += i.length;
+			if (str.substr(currDigit, num.length) === num) {
+				result += romanMap[num];
+				currDigit += num.length;
 			} else {
 				break;
 			}
 		}
-	}
+	})
 	return result;
 }
 
