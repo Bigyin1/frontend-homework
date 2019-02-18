@@ -9,13 +9,13 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('d'), 500);
 
 		assert.strictEqual(roman('iv'), 4);
-		assert.strictEqual(roman('iiii'), 'Wrong Input'); // I может повторяться только 3 раза
+		assert.strictEqual(roman('iiii'), void(0)); // I может повторяться только 3 раза
 		assert.strictEqual(roman('CM'), 900);
 
 		assert.strictEqual(roman('MCMIV'), 1904);
 		assert.strictEqual(roman('MCMXC'), 1990);
 		assert.strictEqual(roman('mmxvii'), 2017);
-		assert.strictEqual(roman('MMMM'), 'Wrong Input'); // M может повторяться только 3 раза
+		assert.strictEqual(roman('MMMM'), void(0)); // M может повторяться только 3 раза
 		assert.strictEqual(roman('CCCXIV'), 314);
 	});
 
@@ -41,13 +41,13 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman правильно определяет невалидный ввод', function (assert) {
-		assert.strictEqual(roman('wrgfrw'), 'Wrong Input');
-		assert.strictEqual(roman(10000), 'Wrong Input');
-		assert.strictEqual(roman(0), 'Wrong Input');
-		assert.strictEqual(roman('IIM'), 'Wrong Input');
-		assert.strictEqual(roman('MMMCMCMXCIX'), 'Wrong Input');
-		assert.strictEqual(roman('XIXI'), 'Wrong Input');
-		assert.strictEqual(roman('XIXU'), 'Wrong Input');
-		assert.strictEqual(roman('CCCIXV'), 'Wrong Input');
+		assert.strictEqual(roman('wrgfrw'), void(0));
+		assert.strictEqual(roman(10000), void(0));
+		assert.strictEqual(roman(0), void(0));
+		assert.strictEqual(roman('IIM'), void(0));
+		assert.strictEqual(roman('MMMCMCMXCIX'), void(0));
+		assert.strictEqual(roman('XIXI'), void(0));
+		assert.strictEqual(roman('XIXU'), void(0));
+		assert.strictEqual(roman('CCCIXV'), void(0));
 	});
 });

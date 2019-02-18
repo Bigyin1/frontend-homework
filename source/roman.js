@@ -1,6 +1,6 @@
 'use strict';
 
-const romanMap = {
+const romanMap = new Map(Object.entries({
 	'M': 1000,
 	'CM': 900,
 	'D': 500,
@@ -14,23 +14,23 @@ const romanMap = {
 	'V': 5,
 	'IV': 4,
 	'I': 1
-};
+}));
 
 /**
  * Gets arabic number, validates it and returns its roman representation
  * @param {integer} number - Arabic number
- * @returns {string} - Roman representation of given number or "Wrong Input"
+ * @returns {string} - Roman representation of given number or void(0)
  */
 const arab2rome =
 	(number) => {
 		let result = '';
 		if (number <= 0 || number > 3999) {
-			return 'Wrong Input';
+			return void(0);
 		}
-		Object.keys(romanMap).forEach((val) => {
-			let repeat = Math.floor(number / romanMap[val]);
-			number -= repeat * romanMap[val];
-			result += val.repeat(repeat);
+		romanMap.forEach((arab, rome) => {
+			let repeat = Math.floor(number / arab);
+			number -= repeat * arab;
+			result += rome.repeat(repeat);
 		})
 		return result;
 	}
@@ -40,34 +40,33 @@ const arab2rome =
  * @param {string} str - Roman number
  * @returns {integer} - Arabic representation of given number
  */
-const rome2arab = (str) => {
-	let result = 0;
-	let currDigit = 0;
-	Object.keys(romanMap).forEach((num) => {
-		while (currDigit < str.length) {
-			if (str.substr(currDigit, num.length) === num) {
-				result += romanMap[num];
-				currDigit += num.length;
-			} else {
+const rome2arab =
+	(str) => {
+		let result = 0;
+		let currDigit = 0;
+		romanMap.forEach((arab, rome) => {
+			while (currDigit < str.length) {
+				if (str.substr(currDigit, rome.length) === rome) {
+					result += arab;
+					currDigit += rome.length
+					continue;
+				}
 				break;
 			}
-		}
-	})
-	return result;
-}
-
+		})
+		return result;
+	}
 
 /**
  * Gets roman numberm, validate it and returns its arabic representation
  * @param {string} str - Roman number
- * @returns {integer || string} - Arabic representation of given number or
- *     "Wrong Input"
+ * @returns {integer || string} - Arabic representation of given number or void(0)
  */
 const validateRoman =
 	(str) => {
 		str = str.toUpperCase();
 		const result = rome2arab(str);
-		return str === arab2rome(result) ? result : 'Wrong Input';
+		return str === arab2rome(result) ? result : void(0);
 	}
 
 /**
@@ -76,9 +75,10 @@ const validateRoman =
  * @returns {integer || string} - Roman or Arabic representation of given number
  */
 const roman = (input) => {
-	if (Number(input) || input === 0) {
+	if (isFinite(input)) {
 		return arab2rome(Number(input));
-	} else {
+	} else if (typeof input === 'string') {
 		return validateRoman(input);
 	}
+	return void(0)
 }
