@@ -48,7 +48,7 @@ const rome2arab =
 			while (currDigit < str.length) {
 				if (str.substr(currDigit, rome.length) === rome) {
 					result += arab;
-					currDigit += rome.length
+					currDigit += rome.length;
 					continue;
 				}
 				break;
@@ -80,5 +80,5 @@ const roman = (input) => {
 	} else if (typeof input === 'string') {
 		return validateRoman(input);
 	}
-	return void(0)
+	return void(0);
 }
