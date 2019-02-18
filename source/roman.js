@@ -33,7 +33,7 @@ const arab2rome =
 			let repeat = Math.floor(number / arab);
 			number -= repeat * arab;
 			result += rome.repeat(repeat);
-		})
+		});
 
 		return result;
 	}
@@ -54,7 +54,7 @@ const rome2arab =
 				result += arab;
 				currDigit += rome.length;
 			}
-		})
+		});
 
 		return result;
 	}
@@ -82,7 +82,7 @@ const roman = (input) => {
 		return arab2rome(Number(input));
 	}
 
-	if (typeof input === 'string') {
+	if (typeof input === 'string' || input instanceof String) {
 		return validateRoman(input);
 	}
 
