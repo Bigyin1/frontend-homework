@@ -24,14 +24,17 @@ const romanMap = new Map(Object.entries({
 const arab2rome =
 	(number) => {
 		let result = '';
+
 		if (number <= 0 || number > 3999) {
 			return void(0);
 		}
+
 		romanMap.forEach((arab, rome) => {
 			let repeat = Math.floor(number / arab);
 			number -= repeat * arab;
 			result += rome.repeat(repeat);
 		})
+
 		return result;
 	}
 
@@ -44,16 +47,15 @@ const rome2arab =
 	(str) => {
 		let result = 0;
 		let currDigit = 0;
+
 		romanMap.forEach((arab, rome) => {
 			while (currDigit < str.length) {
-				if (str.substr(currDigit, rome.length) === rome) {
-					result += arab;
-					currDigit += rome.length;
-					continue;
-				}
-				break;
+				if (str.substr(currDigit, rome.length) !== rome) break;
+				result += arab;
+				currDigit += rome.length;
 			}
 		})
+
 		return result;
 	}
 
@@ -66,6 +68,7 @@ const validateRoman =
 	(str) => {
 		str = str.toUpperCase();
 		const result = rome2arab(str);
+
 		return str === arab2rome(result) ? result : void(0);
 	}
 
@@ -77,8 +80,11 @@ const validateRoman =
 const roman = (input) => {
 	if (isFinite(input)) {
 		return arab2rome(Number(input));
-	} else if (typeof input === 'string') {
+	}
+
+	if (typeof input === 'string') {
 		return validateRoman(input);
 	}
+
 	return void(0);
 }
