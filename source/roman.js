@@ -27,9 +27,9 @@ const arab2rome =
 			return void(0);
 		}
 
-		let res = Array.from(romanMap.keys()).reduce((result, roman) => {
-			let arab = romanMap.get(roman);
-			let repeat = Math.floor(number / arab);
+		const res = Array.from(romanMap.keys()).reduce((result, roman) => {
+			const arab = romanMap.get(roman);
+			const repeat = Math.floor(number / arab);
 			number -= repeat * arab;
 			result += roman.repeat(repeat);
 			return result;
@@ -45,10 +45,10 @@ const arab2rome =
  */
 const rome2arab =
 	(str) => {
-		let res = Array.from(romanMap.keys()).reduce((result, roman) => {
-			let arab = romanMap.get(roman);
+		const res = Array.from(romanMap.keys()).reduce((result, roman) => {
+			const arab = romanMap.get(roman);
 			while (result.currDigit < str.length) {
-				let sub = str.substr(result.currDigit, roman.length);
+				const sub = str.substr(result.currDigit, roman.length);
 				if (sub !== roman) break;
 				result.result += arab;
 				result.currDigit += roman.length;
