@@ -28,10 +28,7 @@ const arab2rome =
 		}
 
 		const res = Array.from(romanMap)
-			.reduce((result, [
-				roman,
-				arab
-			]) => {
+			.reduce((result, [roman, arab]) => {
 				const repeat = Math.floor(number / arab);
 				number -= repeat * arab;
 				result += roman.repeat(repeat);
@@ -48,13 +45,8 @@ const arab2rome =
  */
 const rome2arab =
 	(str) => {
-		const {
-			result,
-		} = Array.from(romanMap)
-			.reduce((result, [
-				roman,
-				arab
-			]) => {
+		const {result, } = Array.from(romanMap)
+			.reduce((result, [roman, arab]) => {
 				while (result.currDigit < str.length) {
 					const sub = str.substr(result.currDigit, roman.length);
 					if (sub !== roman) break;
@@ -62,10 +54,7 @@ const rome2arab =
 					result.currDigit += roman.length;
 				}
 				return result;
-			}, {
-				'result': 0,
-				'currDigit': 0
-			});
+			}, {'result': 0, 'currDigit': 0});
 
 		return result;
 	}
