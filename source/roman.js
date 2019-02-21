@@ -1,20 +1,20 @@
 'use strict';
 
-const romanMap = new Map();
-
-romanMap.set('M', 1000);
-romanMap.set('CM', 900);
-romanMap.set('D', 500);
-romanMap.set('CD', 400);
-romanMap.set('C', 100);
-romanMap.set('XC', 90);
-romanMap.set('L', 50);
-romanMap.set('XL', 40);
-romanMap.set('X', 10);
-romanMap.set('IX', 9);
-romanMap.set('V', 5);
-romanMap.set('IV', 4);
-romanMap.set('I', 1);
+const romanMap = new Map([
+	['M', 1000],
+	['CM', 900],
+	['D', 500],
+	['CD', 400],
+	['C', 100],
+	['XC', 90],
+	['L', 50],
+	['XL', 40],
+	['X', 10],
+	['IX', 9],
+	['V', 5],
+	['IV', 4],
+	['I', 1],
+]);
 
 /**
  * Gets arabic number, validates it and returns its roman representation
@@ -27,8 +27,10 @@ const arab2rome =
 			return void(0);
 		}
 
-		const res = Array.from(romanMap.keys()).reduce((result, roman) => {
-			const arab = romanMap.get(roman);
+		const res = Array.from(romanMap).reduce((result, [
+			roman,
+			arab
+		]) => {
 			const repeat = Math.floor(number / arab);
 			number -= repeat * arab;
 			result += roman.repeat(repeat);
@@ -45,8 +47,12 @@ const arab2rome =
  */
 const rome2arab =
 	(str) => {
-		const res = Array.from(romanMap.keys()).reduce((result, roman) => {
-			const arab = romanMap.get(roman);
+		const {
+			result,
+		} = Array.from(romanMap).reduce((result, [
+			roman,
+			arab
+		]) => {
 			while (result.currDigit < str.length) {
 				const sub = str.substr(result.currDigit, roman.length);
 				if (sub !== roman) break;
@@ -59,7 +65,7 @@ const rome2arab =
 			'currDigit': 0
 		});
 
-		return res.result;
+		return result;
 	}
 
 /**
